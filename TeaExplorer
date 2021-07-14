@@ -4,7 +4,7 @@ import java.lang.Math;
 /** The first version of the Tea Explorer game,
  * which encourages players to buy virtual tea and teapots.
  * @author  SJ McKinlay
- * @version 0.0001 2nd July, 2021
+ * @version 0.0002 14th July, 2021
  *
  */
 
@@ -19,13 +19,22 @@ public class TeaExplorer {
         Scanner tConsole = new Scanner(System.in);
         double initFunds;
         String strFunds;
+        int storeChoice;
 
 
         initFunds = getFunds(tConsole);
         strFunds = toDollars(initFunds);
+
+        double currentFunds = initFunds;
+
+        while (currentFunds > 0.00000001) {
+        storeChoice = whichStore(tConsole);
+        System.out.println("You chose store number " + storeChoice + " from which to purchase your tea.");
+        currentFunds = (currentFunds - 10);
+        }
+
         System.out.print("You have " + strFunds);
         System.out.println(" left to spend. Happy shopping!");
-
     }
 
     // This method accepts user input on how much money they have,
@@ -44,4 +53,12 @@ public class TeaExplorer {
         return(straFunds);
 
     }
+
+    public static int whichStore (Scanner whichConsole) {
+        int whichOne;
+        System.out.println("Which store do you want to look at?");
+        whichOne = Math.abs(whichConsole.nextInt());
+        return(whichOne);
+    }
+
 }
