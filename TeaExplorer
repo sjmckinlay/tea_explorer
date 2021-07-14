@@ -8,7 +8,7 @@ import java.lang.Math;
  *
  */
 
-public class TeaExplorer {
+public class TeaExplorerBones {
 
     // The classic "main" method. It opens a scanner for
     // player input, and calls on the getFunds method.
@@ -18,24 +18,31 @@ public class TeaExplorer {
         // and store that as a double "Funds."
         Scanner tConsole = new Scanner(System.in);
         double initFunds;
-        String strFunds;
         int storeChoice;
 
 
+        // Find out how much money the buyer has to start with.
         initFunds = getFunds(tConsole);
-        strFunds = toDollars(initFunds);
+        System.out.print("You have " + toDollars(initFunds));
+        System.out.println(" left to spend. Happy shopping!");
+
+        int numBought = 0;
 
         double currentFunds = initFunds;
 
-        while (currentFunds > 0.00000001) {
+        while (currentFunds >= 0.00000001) {
         storeChoice = whichStore(tConsole);
-        System.out.println("You chose store number " + storeChoice + " from which to purchase your tea.");
-        currentFunds = (currentFunds - 10);
+        System.out.print("You chose store number " + storeChoice);
+        System.out.println(" from which to purchase your tea.");
+        currentFunds = (currentFunds - 10.0);
+        numBought += 1;
         }
 
-        System.out.print("You have " + strFunds);
-        System.out.println(" left to spend. Happy shopping!");
+        System.out.print("You have " + toDollars(currentFunds) +" remaining,");
+        System.out.println(" and you bought " + numBought + " items.");
     }
+
+
 
     // This method accepts user input on how much money they have,
     // then prints the amount.
@@ -46,14 +53,19 @@ public class TeaExplorer {
         return(toFunds);
     }
 
+
+
     // This method takes in a double, and outputs a dollar amount.
     public static String toDollars (double taFunds) {
         String straFunds = "$";
         straFunds = (straFunds + String.format("%.2f", taFunds));
         return(straFunds);
-
     }
 
+
+
+    // This method asks the user which store they want to buy from,
+    // then returns an integer signifying which store they chose.
     public static int whichStore (Scanner whichConsole) {
         int whichOne;
         System.out.println("Which store do you want to look at?");
