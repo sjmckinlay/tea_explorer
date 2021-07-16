@@ -1,0 +1,58 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+/** The Teaware class generates objects of the
+ * "Teaware" type.  These objects have several
+ * associated statistics, including the company
+ * of origin, the type of item (teapot, gaiwan,
+ * consumable tea, etc), and the price.
+ */
+
+public class Teaware {
+
+    // 0 = Amazon, 1 = Liquid Proust, 2 = Taobao, 3 = Wish.com,
+    // 4 = Yunnan Sourcing
+    int numCompany;
+
+    // 0 = tea, 1 = non-consumable teaware.
+    int itemType;
+
+    // the number of "points" earned for this object by the player.
+    int chaQi;
+
+    // price is the cost, in USD, of the item.
+    double price;
+
+    // The item name, randomly generated.
+    String teawareName;
+
+
+    public static void main(String[] args) {
+
+    }
+
+
+    // Various horrible things may happen, based on
+    // the item type and its source.
+    public int riskFactor (int theNumCompany, int theItemType, double thePrice) {
+        double thisHappened = theItemType + theNumCompany + thePrice;
+        return((int)thisHappened);
+    }
+
+
+
+    // Generate the amount of cha Qi that this specific
+    // object will grant to the player.
+    public double genChaQi (int theNumCompany, int theItemType, double thePrice) {
+
+        return((double) theItemType * thePrice);
+    }
+
+
+
+    // Create a unique name for this specific instance of Teaware object.
+    public String genName (int theItemType, String theTeawareName) {
+        String myItem = ("theTeawareName " + theItemType + "?");
+        return(myItem);
+    }
+}
