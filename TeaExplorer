@@ -1,76 +1,58 @@
 import java.util.Scanner;
 import java.lang.Math;
 
-/** The first version of the Tea Explorer game,
- * which encourages players to buy virtual tea and teapots.
- * @author  SJ McKinlay
- * @version 0.0002 14th July, 2021
- *
+/** The Teaware class generates objects of the
+ * "Teaware" type.  These objects have several
+ * associated statistics, including the company
+ * of origin, the type of item (teapot, gaiwan,
+ * consumable tea, etc), and the price.
  */
 
-public class TeaExplorerBones {
+public class Teaware {
 
-    // The classic "main" method. It opens a scanner for
-    // player input, and calls on the getFunds method.
+    // 0 = Amazon, 1 = Liquid Proust, 2 = Taobao, 3 = Wish.com,
+    // 4 = Yunnan Sourcing
+    int numCompany;
+
+    // 0 = tea, 1 = non-consumable teaware.
+    int itemType;
+
+    // the number of "points" earned for this object by the player.
+    int chaQi;
+
+    // price is the cost, in USD, of the item.
+    double price;
+
+    // The item name, randomly generated.
+    String teawareName;
+
+
     public static void main(String[] args) {
 
-        // First, we ask the hobbyist how much money they are willing to spend,
-        // and store that as a double "Funds."
-        Scanner tConsole = new Scanner(System.in);
-        double initFunds;
-        int storeChoice;
+    }
 
 
-        // Find out how much money the buyer has to start with.
-        initFunds = getFunds(tConsole);
-        System.out.print("You have " + toDollars(initFunds));
-        System.out.println(" left to spend. Happy shopping!");
-
-        int numBought = 0;
-
-        double currentFunds = initFunds;
-
-        while (currentFunds >= 0.00000001) {
-        storeChoice = whichStore(tConsole);
-        System.out.print("You chose store number " + storeChoice);
-        System.out.println(" from which to purchase your tea.");
-        currentFunds = (currentFunds - 10.0);
-        numBought += 1;
-        }
-
-        System.out.print("You have " + toDollars(currentFunds) +" remaining,");
-        System.out.println(" and you bought " + numBought + " items.");
+    // Various horrible things may happen, based on
+    // the item type and its source.
+    public int riskFactor (int theNumCompany, int theItemType, double thePrice) {
+        double thisHappened = theItemType + theNumCompany + thePrice;
+        return((int)thisHappened);
     }
 
 
 
-    // This method accepts user input on how much money they have,
-    // then prints the amount.
-    public static double getFunds(Scanner toConsole) {
-        double toFunds;
-        System.out.println("How much money do you have to spend?");
-        toFunds = Math.abs(toConsole.nextDouble());
-        return(toFunds);
+    // Generate the amount of cha Qi that this specific
+    // object will grant to the player.
+    public double genChaQi (int theNumCompany, int theItemType, double thePrice) {
+
+        return((double) theItemType * thePrice);
     }
 
 
 
-    // This method takes in a double, and outputs a dollar amount.
-    public static String toDollars (double taFunds) {
-        String straFunds = "$";
-        straFunds = (straFunds + String.format("%.2f", taFunds));
-        return(straFunds);
+    // Create a unique name for this specific instance of Teaware object.
+    public String genName (int theItemType, String theTeawareName) {
+        String myItem = ("theTeawareName " + theItemType + "?");
+        return(myItem);
     }
-
-
-
-    // This method asks the user which store they want to buy from,
-    // then returns an integer signifying which store they chose.
-    public static int whichStore (Scanner whichConsole) {
-        int whichOne;
-        System.out.println("Which store do you want to look at?");
-        whichOne = Math.abs(whichConsole.nextInt());
-        return(whichOne);
-    }
-
 }
